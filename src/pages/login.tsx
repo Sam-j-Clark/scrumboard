@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
-import {Container, Box} from '@mui/material';
-
-
+import {Avatar, Container, Box, Grid, Card, CardContent, Typography, TextField, Button, Icon} from '@mui/material';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 function LoginPage() {
 
@@ -25,19 +25,64 @@ function LoginPage() {
     }
 
     return (
-        <Container sx={{
-            width: "100%",
- height: "100%", backgroundColor: '#fafafa',
-            }}>
-            <Box sx={{ width: 300, height: 300, backgroundColor: '#ffffff', border: "solid gray 1px"}}>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <p className="text-2xl text-center">Login</p>
-                    <input type="email" placeholder="jane.doe@example.com" {...register('email')}/>
-                    <br/>
-                    <button type="submit">Login</button>
-                </form>
-                <Link href={"/register"}>Don't have an account? Sign up here</Link>
-            </Box>
+        <Container maxWidth="xl" 
+             component="main"
+            sx={{backgroundColor: '#fafafa', p: "0px !important"}}
+            
+            >
+                <Grid container
+                    spacing={0}
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    style={{ minHeight: '100vh' }}
+                >
+                    <Grid item xs={3} >
+                        <Card variant="outlined" sx={{height: "480px", boxShadow: 2}}>
+                            <CardContent sx={{height: "calc(100% - 32px)", paddingBottom: "16px !important"}}>
+                            <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} paddingY="28px">
+                                    <Avatar sx={{ bgcolor: "purple" }}>
+                                        <LockOpenIcon />
+                                    </Avatar>
+                                </Box>
+                                <Typography variant="h4" color="default" align="center">Projects</Typography>                                
+                                <Box component="form" onSubmit={handleSubmit(onSubmit)} paddingY="14px">
+                                    <TextField {...register('email')}
+                                        fullWidth
+                                        id="email"
+                                        label="Email"
+                                        placeholder="jane.doe@example.com"
+                                        type="email"
+                                        sx={{marginY: "10px"}}/>
+                                    <Button variant="contained" color="primary" type="submit" fullWidth>
+                                        Login
+                                    </Button>
+                                    <Link href={"/register"}>
+                                        <Typography variant="body1" color="initial" align="center" marginTop="8px">Don't have an account? Sign up here</Typography>
+                                    </Link>
+                                </Box>
+                                <Box paddingTop="48px">
+                                    <Link href="https://github.com/Sam-j-Clark/scrumboard" target="_blank" style={{ textDecoration: 'none' }}>
+                                        <Grid
+                                            container
+                                            spacing={2}
+                                            direction="row"   
+                                            justifyContent="center"
+                                            alignItems="center"
+                                            >
+                                                <Grid item>
+                                                    <GitHubIcon style={{color: "#333"}} fontSize="large"/>
+                                                </Grid>
+                                                <Grid item>
+                                                    <Typography variant="h6" color="initial">Github</Typography>
+                                                </Grid>
+                                        </Grid>
+                                    </Link>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>      
+                </Grid>
         </Container>
     )
 }
